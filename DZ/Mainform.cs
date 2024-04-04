@@ -1,6 +1,11 @@
+using Microsoft.Data.Sqlite;
 using System.Reflection.Emit;
 using System.Windows.Forms;
 using static System.Windows.Forms.DataFormats;
+using System.Data.SQLite;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Data;
 
 
 namespace DZ
@@ -16,12 +21,13 @@ namespace DZ
             }
             return string.Empty;
         }
-        
+
 
         private System.Windows.Forms.Timer timer1;
         public Mainform()
         {
             InitializeComponent();
+
             timer1 = new System.Windows.Forms.Timer();
             timer1.Tick += new EventHandler(timer1_Tick);
             timer1.Interval = 1000;
@@ -81,6 +87,7 @@ namespace DZ
         }
 
 
+
         private void button1_Click(object sender, EventArgs e)
         {
             GuestCard guestcard = new GuestCard();
@@ -97,7 +104,6 @@ namespace DZ
 
         private void dataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            // Проверяем, что была затронутая ячейка
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 int columnIndex1 = 1;
@@ -107,18 +113,20 @@ namespace DZ
                 int columnIndex7 = 7;
 
 
-                string columnValue1 = dataGridView1.Rows[e.RowIndex].Cells[columnIndex1].Value.ToString();
-                string columnValue3 = dataGridView1.Rows[e.RowIndex].Cells[columnIndex3].Value.ToString();
-                string columnValue5 = dataGridView1.Rows[e.RowIndex].Cells[columnIndex5].Value.ToString();
-                string columnValue6 = dataGridView1.Rows[e.RowIndex].Cells[columnIndex6].Value.ToString();
-                string columnValue7 = dataGridView1.Rows[e.RowIndex].Cells[columnIndex7].Value.ToString();
+                string column1 = dataGridView1.Rows[e.RowIndex].Cells[columnIndex1].Value.ToString();
+                string column3 = dataGridView1.Rows[e.RowIndex].Cells[columnIndex3].Value.ToString();
+                string column5 = dataGridView1.Rows[e.RowIndex].Cells[columnIndex5].Value.ToString();
+                string column6 = dataGridView1.Rows[e.RowIndex].Cells[columnIndex6].Value.ToString();
+                string column7 = dataGridView1.Rows[e.RowIndex].Cells[columnIndex7].Value.ToString();
 
-                FIO.Text = columnValue1;
-                status2.Text = columnValue3;
-                dateofarrival2.Text = columnValue5;
-                dateofdeparture2.Text = columnValue6;
-                number.Text = columnValue7;
+                FIO.Text = column1;
+                status2.Text = column3;
+                dateofarrival2.Text = column5;
+                dateofdeparture2.Text = column6;
+                number.Text = column7;
+
             }
         }
+
     }
 }
